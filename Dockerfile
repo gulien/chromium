@@ -6,5 +6,5 @@ RUN \
     # Cleanup.
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUn \
+RUN \
     chromium --version

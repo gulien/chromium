@@ -3,7 +3,7 @@
 RELEASE=$(lsb_release -a)
 KERNEL=$(uname -a)
 ARCH=$(dpkg --print-architecture)
-CHROMIUM_VERSION=$(chromium --version)
+CHROMIUM_VERSION=$(chromium --version 2>&1)
 
 read -r -d '' OUTPUT << EOM
 $RELEASE

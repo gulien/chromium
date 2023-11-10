@@ -24,4 +24,5 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v4
       - name: Build ${{ matrix.platform }}
-        run: docker buildx build --platform ${{ matrix.platform }} -f Dockerfile .
+        run: |
+          docker buildx build --progress=plain --platform ${{ matrix.platform }} -t gulnap/chromium -f Dockerfile .

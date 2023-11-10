@@ -5,3 +5,6 @@ RUN \
     DEBIAN_FRONTEND=noninteractive apt-get install -y -qq --no-install-recommends chromium &&\
     # Cleanup.
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+RUn \
+    chromium --version

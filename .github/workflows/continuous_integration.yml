@@ -15,7 +15,7 @@ jobs:
       matrix:
         platform: [ 'linux/amd64', 'linux/arm64', 'linux/386', 'linux/arm/v7']
     continue-on-error: true
-    name: Build on ${{ matrix.platform }}
+    name: Build
     steps:
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3

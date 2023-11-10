@@ -1,4 +1,4 @@
-name: Continuous Integration
+name: Build Chromium
 
 on:
   push:
@@ -15,7 +15,7 @@ jobs:
       matrix:
         platform: [ 'linux/amd64', 'linux/arm64', 'linux/386', 'linux/arm/v7']
     continue-on-error: true
-    name: Build
+    name: Build ${{ matrix.platform }}
     steps:
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -23,6 +23,5 @@ jobs:
         uses: docker/setup-buildx-action@v3
       - name: Checkout source code
         uses: actions/checkout@v4
-      - name: Build {{ matrix.platform }}
-        run: |
-          docker buildx build --platform {{ matrix.platform }} -f build/Dockerfile .
+      - name: Build ${{ matrix.platform }}
+        run: docker buildx build --platform ${{ matrix.platform }} -f Dockerfile .

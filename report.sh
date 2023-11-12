@@ -1,15 +1,15 @@
 #!/bin/bash
 
-RELEASE=$(lsb_release -a)
+CPU_INFO=$(cat /proc/cpuinfo)
 KERNEL=$(uname -a)
-ARCH=$(dpkg --print-architecture)
 CHROMIUM_VERSION=$(chromium --version 2>&1)
 
 read -r -d '' OUTPUT << EOM
-$RELEASE
+cat /proc/cpuinfo:
+$CPU_INFO
 
-Kernel: $KERNEL
-Architecture: $ARCH
+uname -a:
+$KERNEL
 
 chromium --version:
 $CHROMIUM_VERSION

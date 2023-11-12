@@ -14,7 +14,7 @@ jobs:
     strategy:
       matrix:
         platform: [ 'linux/amd64', 'linux/arm64', 'linux/386', 'linux/arm/v7' ]
-        chromium_version: [ 'latest', '116.0.5845.180-1~deb12u1' ]
+        chromium_version: [ 'latest', '116.0.5845.180-1~deb12u1', '117.0.5938.132-1~deb12u1', '118.0.5993.117-1~deb12u1' ]
     continue-on-error: true
     name: Build ${{ matrix.platform }} with Chromium ${{ matrix.chromium_version }}
     steps:

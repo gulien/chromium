@@ -20,9 +20,9 @@ jobs:
           - version: '116.0.5845.180-1~deb12u1'
             link: ''
           - version: '117.0.5938.132-1~deb12u1'
-            link: 'https://snapshot.debian.org/archive/debian-security/20231004T183639Z/pool/updates/main/c/chromium'
+            link: 'http://snapshot.debian.org/archive/debian-security/20231004T183639Z/pool/updates/main/c/chromium'
           - version: '118.0.5993.117-1~deb12u1'
-            link: 'https://snapshot.debian.org/archive/debian-security/20231012T172845Z/pool/updates/main/c/chromium'
+            link: 'http://snapshot.debian.org/archive/debian-security/20231012T172845Z/pool/updates/main/c/chromium'
     continue-on-error: true
     name: Build ${{ matrix.platform }} with Chromium ${{ matrix.chromium.version }}
     steps:

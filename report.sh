@@ -1,18 +1,18 @@
 #!/bin/bash
 
-CPU_INFO=$(cat /proc/cpuinfo)
-KERNEL=$(uname -a)
 CHROMIUM_VERSION=$(chromium --version 2>&1)
+KERNEL=$(uname -a)
+CPU_INFO=$(cat /proc/cpuinfo)
 
 read -r -d '' OUTPUT << EOM
-cat /proc/cpuinfo:
-$CPU_INFO
+chromium --version:
+$CHROMIUM_VERSION
 
 uname -a:
 $KERNEL
 
-chromium --version:
-$CHROMIUM_VERSION
+cat /proc/cpuinfo:
+$CPU_INFO
 EOM
 
 echo "$OUTPUT"

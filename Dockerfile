@@ -14,11 +14,10 @@ RUN \
     else \
       DEBIAN_FRONTEND=noninteractive apt-get install -y -qq --no-install-recommends devscripts &&\
       ARCH=$(dpkg --print-architecture) &&\
+      debsnap chromium-common "$CHROMIUM_VERSION" -v --force --binary --architecture "$ARCH" &&\
       debsnap chromium "$CHROMIUM_VERSION" -v --force --binary --architecture "$ARCH" &&\
-      DEBIAN_FRONTEND=noninteractive apt-get install -y -qq --no-install-recommends "./binary-chromium/chromium_${CHROMIUM_VERSION}_${ARCH}.deb"; \
-    fi' &&\
-    # Cleanup.
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+      DEBIAN_FRONTEND=noninteractive apt-get install --fix-broken -y -qq --no-install-recommends "./binary-chromium-common/chromium-common_${CHROMIUM_VERSION}_${ARCH}.deb" "./binary-chromium/chromium_${CHROMIUM_VERSION}_${ARCH}.deb"; \
+    fi'
 
 COPY report.sh usr/bin/report
 

@@ -1,13 +1,7 @@
 FROM debian:12-slim
 
 ARG CHROMIUM_VERSION="latest"
-ARG CHROMIUM_SNAPSHOT_LINK="false"
-
-RUN \
-    apt-get update -qq &&\
-    DEBIAN_FRONTEND=noninteractive apt-get install -y -qq --no-install-recommends curl &&\
-     # Cleanup.
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+ARG CHROMIUM_SNAPSHOT="false"
 
 RUN \
     apt-get update -qq &&\
@@ -15,13 +9,13 @@ RUN \
     'set -e &&\
     if [[ "$CHROMIUM_VERSION" == "latest" ]]; then \
      DEBIAN_FRONTEND=noninteractive apt-get install -y -qq --no-install-recommends chromium; \
-    elif [[ "$CHROMIUM_SNAPSHOT_LINK" == "" ]]; then \
+    elif [[ "$CHROMIUM_SNAPSHOT" == "false" ]]; then \
      DEBIAN_FRONTEND=noninteractive apt-get install -y -qq --no-install-recommends chromium-common="$CHROMIUM_VERSION" chromium="$CHROMIUM_VERSION"; \
     else \
+      DEBIAN_FRONTEND=noninteractive apt-get install -y -qq --no-install-recommends apt-get install devscripts &&\
       ARCH=$(dpkg --print-architecture) &&\
-      curl -o ./chromium-common.deb "$CHROMIUM_SNAPSHOT_LINK/chromium-common_$CHROMIUM_VERSION_$ARCH.deb" &&\
-      curl -o ./chromium.deb "$CHROMIUM_SNAPSHOT_LINK/chromium_$CHROMIUM_VERSION_$ARCH.deb" &&\
-      DEBIAN_FRONTEND=noninteractive apt-get install -y -qq --no-install-recommends ./chromium-common.deb ./chromium.deb; \
+      debsnap chromium "$CHROMIUM_VERSION" -v --force --binary --architecture "$ARCH" &&\
+      DEBIAN_FRONTEND=noninteractive apt-get install -y -qq --no-install-recommends "./binary-chromium/chromium_$CHROMIUM_VERSION_$ARCH.deb"; \
     fi' &&\
     # Cleanup.
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*

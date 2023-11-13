@@ -16,13 +16,13 @@ jobs:
         platform: [ 'linux/amd64', 'linux/arm64', 'linux/386', 'linux/arm/v7' ]
         chromium:
           - version: 'latest'
-            link: ''
+            snapshot: 'false'
           - version: '116.0.5845.180-1~deb12u1'
-            link: ''
+            snapshot: 'false'
           - version: '117.0.5938.132-1~deb12u1'
-            link: 'http://snapshot.debian.org/archive/debian-security/20231004T183639Z/pool/updates/main/c/chromium'
+            snapshot: 'true'
           - version: '118.0.5993.117-1~deb12u1'
-            link: 'http://snapshot.debian.org/archive/debian-security/20231012T172845Z/pool/updates/main/c/chromium'
+            snapshot: 'true'
     continue-on-error: true
     name: Build ${{ matrix.platform }} with Chromium ${{ matrix.chromium.version }}
     steps:
@@ -34,4 +34,4 @@ jobs:
         uses: actions/checkout@v4
       - name: Build ${{ matrix.platform }} with Chromium ${{ matrix.chromium_version.version }}
         run: |
-          docker buildx build --progress=plain --build-arg CHROMIUM_VERSION=${{ matrix.chromium.version }} --build-arg CHROMIUM_SNAPSHOT_LINK=${{ matrix.chromium.link }} --platform ${{ matrix.platform }} -t gulnap/chromium -f Dockerfile .
+          docker buildx build --progress=plain --build-arg CHROMIUM_VERSION=${{ matrix.chromium.version }} --build-arg CHROMIUM_SNAPSHOT=${{ matrix.chromium.snapshot }} --platform ${{ matrix.platform }} -t gulnap/chromium -f Dockerfile .

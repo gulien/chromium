@@ -19,9 +19,9 @@ jobs:
             snapshot: 'false'
           - version: '116.0.5845.180-1~deb12u1'
             snapshot: 'false'
-          - version: '117.0.5938.132-1~deb12u1'
+          - version: '117.0.5938.149-1~deb12u1'
             snapshot: 'true'
-          - version: '118.0.5993.117-1~deb12u1'
+          - version: '118.0.5993.70-1~deb12u1'
             snapshot: 'true'
     continue-on-error: true
     name: Build ${{ matrix.platform }} with Chromium ${{ matrix.chromium.version }}

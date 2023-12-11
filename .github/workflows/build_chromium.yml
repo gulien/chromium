@@ -18,7 +18,7 @@ jobs:
           - version: 'latest'
             snapshot: 'false'
           - version: '116.0.5845.180-1~deb12u1'
-            snapshot: 'false'
+            snapshot: 'true'
           - version: '117.0.5938.149-1~deb12u1'
             snapshot: 'true'
           - version: '118.0.5993.70-1~deb12u1'
